@@ -4,7 +4,8 @@ def main():
         print("1. Calorie & Macro Tracker")
         print("2. Step Counter")
         print("3. Water Intake Tracker")
-        print("4. Exit")
+        print("4. Morning check")
+        print("5. Exit")
         
         choice = input("Enter your choice (1-4): ").strip()
         
@@ -15,9 +16,12 @@ def main():
         elif choice == '3':
             total_water_intake()
         elif choice == '4':
-            print("Exiting Calory App. Keep grinding! ⚔️")
+             morning_check_in()
+        elif choice =='5':
+            print("You have exited the app.")
             break
         else:
+          
             print("Invalid choice! Please select between 1 and 4.")
 
 
@@ -105,4 +109,30 @@ def total_water_intake(water_goal=3000):
             
 
     print(f"You have completed your water intake! Total consumed today: {total_consumed}ml. Congratulations! 🎉")
+  def morning_check_in():
+    while True:
+        try:
+            sleep_time = float(input("Enter your total sleep time last night (hours): "))
+            
+            # Range logic matching our 8-hour target system
+            if 7.5 <= sleep_time <= 10.0:
+                print("Status: Peak Anabolic State 🔥 (Optimal 8h Sleep achieved)")
+                break  # Successful input, exit the check-in loop
+            elif 6.0 <= sleep_time < 7.5:
+                print("Status: Moderate ⚡ (Slightly less sleep, keep intensity in check)")
+                break
+            elif 3.0 <= sleep_time < 6.0:
+                print("Status: CNS Fatigue Warning ⚠️ (Low sleep. Prioritize form today)")
+                break
+            elif 0.0 <= sleep_time < 3.0:
+                print("Status: Critical Alert 🛑 (Severe sleep deprivation. Take a nap before training)")
+                break
+            else:
+                print("Error: Invalid hours entered. Please put a realistic number (0-24).")
+                
+        except ValueError:
+            print("Invalid input! Please enter numbers only (e.g., 7.5).")
+            # Loop will automatically continue to ask again
+      
+
 main()
