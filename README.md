@@ -40,5 +40,6 @@ Persistent Control Loop (main()): Ensures the application loops smoothly back to
 
 Zero Bloatware: Built using core Python standard libraries (input, print, while, if-elif) ensuring blazing-fast execution speeds and zero external dependencies.
 
+⚙️ Logic & Threshold MatrixThe module uses an optimized conditional evaluation flow based on target biological recovery zones:Sleep DurationStatus OutputTraining Directive7.5 hrs – 10.0 hrsPeak Anabolic State 🔥Optimal recovery achieved. Safe for heavy overload.6.0 hrs – 7.4 hrsModerate Recovery ⚡Good condition. Keep form tight and intensity controlled.3.0 hrs – 5.9 hrsCNS Fatigue Warning ⚠️Elevated neural fatigue. Prioritize technique over max load.0.0 hrs – 2.9 hrsCritical Recovery Deficit 🛑Severe deprivation. Short nap recommended prior to training.
 🎯 Conclusion
 Calory is more than just a script—it bridges the gap between software development logic and real-world health optimization. It provides a fast, efficient, and distraction-free way to maintain daily discipline.
