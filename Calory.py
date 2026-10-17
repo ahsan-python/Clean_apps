@@ -133,6 +133,26 @@ def total_water_intake(water_goal=3000):
         except ValueError:
             print("Invalid input! Please enter numbers only (e.g., 7.5).")
             # Loop will automatically continue to ask again
+def morning_advice(sleep_time):
+    # Ab numeric comparison hoga, string check nahi
+    if 7.5 <= sleep_time <= 10.0:
+        print("If you are feeling tired, drink water or go for a walk. "
+              "If you are feeling fresh, carry on your day as normal.")
+        
+    elif 6.0 <= sleep_time < 7.5:
+        print("If you are feeling tired, take a small 10 to 20 min nap. "
+              "If you are feeling fresh, carry on your day as normal.")
+        
+    elif 3.0 <= sleep_time < 6.0:
+        print("If you are feeling tired, take a small 10 to 20 min nap. "
+              "If you are feeling fresh, carry on your day as normal.")
+        
+    else:
+        print("Status: Severe sleep deprivation/Invalid range. Rest is top priority!")
+
+# --- Execution ---
+user_sleep = morning_check_in()  # Pehle check-in chalega
+morning_advice(user_sleep)
       
 
 main()
