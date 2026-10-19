@@ -24,6 +24,73 @@ def main():
           
             print("Invalid choice! Please select between 1 and 4.")
 
+def calorie_tracker():
+    while True:
+        try:
+            # 1. Goal choose karein aur target base set karein
+            decision = input("\nBulk, Cut, or Maintain? (type 'bulk' / 'cut' / 'maintain'): ").strip().lower()
+
+            if decision == 'bulk':
+                calorie_intake = 2500
+            elif decision == 'cut':
+                calorie_intake = 1800
+            elif decision == 'maintain':
+                calorie_intake = 2000
+            else:
+                print("Invalid input! Defaulting to Maintenance (2000 kcal).")
+                calorie_intake = 2000
+
+            print(f"--> Your target for today is: {calorie_intake} kcal")
+
+            # 2. Meals log karne ka simple Loop
+            calories_total = 0
+            while True:
+                meal_input = input("\nEnter meal calories (or type 'done' to calculate macros): ").strip().lower()
+                
+                if meal_input == 'done':
+                    break  # Logging loop se bahar niklo
+                
+                # Check karein agar valid number hai
+                if meal_input.isdigit():
+                    calories_total += int(meal_input)
+                    print(f"Total so far: {calories_total} / {calorie_intake} kcal")
+                else:
+                    print("Please enter a valid number or 'done'.")
+
+            # 3. Final Target Status Check
+            print("\n--- FINAL SUMMARY ---")
+            if calories_total >= calorie_intake:
+                print(f"🔥 Target Hit! You ate {calories_total} kcal (Goal was {calorie_intake} kcal).")
+            else:
+                needed = calorie_intake - calories_total
+                print(f"⚠️ Target Missed! You ate {calories_total} kcal. You are still lacking {needed} kcal.")
+
+            # 4. Macro Split (30% Protein, 40% Carbs, 30% Fats)
+            show_macros = input("\nDo you want to see macro breakdown? (Press 'Enter' for Yes / type 'exit' to quit): ").strip().lower()
+
+            if show_macros == 'exit':
+                print("Keep grinding! ⚔️")
+                break
+
+            protein_g = (calories_total * 0.30) / 4
+            carbs_g = (calories_total * 0.40) / 4
+            fats_g = (calories_total * 0.30) / 9
+
+            print(f"\n--- MACRO BREAKDOWN ({calories_total} kcal) ---")
+            print(f"Protein : {protein_g:.1f}g")
+            print(f"Carbs   : {carbs_g:.1f}g")
+            print(f"Fats    : {fats_g:.1f}g")
+            print("------------------------------------------")
+
+            # Track end condition
+            again = input("\nDo you want to track another day? (yes/no): ").strip().lower()
+            if again != 'yes':
+                print("System Offline. Stay consistent, warrior! ⚔️🔥")
+                break
+
+        except ValueError:
+            print("Error! Please enter numbers only for calories.")
+
 
 
 
