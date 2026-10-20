@@ -1,3 +1,56 @@
+import json
+import os
+from datetime import date
+
+DATA_FILE = "fitness_data.json"
+
+# --- HELPER FUNCTIONS FOR 7-WEEK STORAGE ---
+def load_data():
+    """File se purana history load karta hai"""
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "r") as f:
+            return json.load(f)
+    return {}
+
+def save_daily_data(calories, protein, steps, water):
+    """Aaj ka data JSON file mein lock/save karta hai"""
+    data = load_data()
+    today = str(date.today())
+    
+    # Existing entry updates or new entry
+    data[today] = {
+        "calories": calories,
+        "protein_g": round(protein, 1),
+        "steps": steps,
+        "water_ml": water
+    }
+    
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f, indent=4)
+    print("\n✅ Today's progress saved to 7-Week History!")
+
+def view_analytics():
+    """7-Week History ko Table format mein display karta hai"""
+    data = load_data()
+    if not data:
+        print("\n⚠️ No history recorded yet! Track a day first.")
+        return
+
+    print("\n" + "="*55)
+    print("      📊 7-WEEK FITNESS & BULK HISTORY TABLE      ")
+    print("="*55)
+    print(f"| {'Date':<12} | {'Calories':<10} | {'Protein (g)':<12} | {'Steps':<7} |")
+    print("-" * 55)
+    
+    # Reverse sort taaki latest date sab se upar aaye
+    for entry_date in sorted(data.keys(), reverse=True):
+        entry = data[entry_date]
+        cal = entry.get('calories', 0)
+        prot = entry.get('protein_g', 0)
+        steps = entry.get('steps', 0)
+        print(f"| {entry_date:<12} | {cal:<10} | {prot:<12} | {steps:<7} |")
+        
+    print("="*55)
 def main():
   while True:   
         print("\n--- WELCOME TO CALORY APP ---")
