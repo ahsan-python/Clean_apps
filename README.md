@@ -1,45 +1,42 @@
-"The Ultimate Lightweight Fitness & Nutrition Suite"
+# MyFit.Pal
 
-🚀 1. Executive Summary & Vision
-Calory is a high-performance, lightweight Command Line Interface (CLI) application built for fitness enthusiasts. Its primary objective is to streamline daily health tracking—covering calories, macronutrients, hydration, and physical activity—directly in the terminal without the clutter of heavy, over-engineered graphical user interfaces. Built entirely in Python, it demonstrates clean software architecture, modular functions, and robust control loops.
+A lightweight, zero-dependency local web application for tracking daily calories, macronutrients, step count, and water intake—built with Object-Oriented Python and a clean browser interface.
 
-🧩 2. Core Architecture & Features Breakdown
-The application is driven by a central, interactive Main Menu System (while True loop) that seamlessly routes users through three core tracking modules:
+## Overview
 
-🔹 Module 1: Calorie & Macro Tracker (calorie_tracker)
-Dynamic Calorie Target Loop: Prompts the user for their daily caloric intake. If the target is unfulfilled, it calculates the precise deficit and allows users to log extra meals dynamically until the goal is met.
+**MyFit.Pal** evolved from a terminal-based CLI fitness tracker into a full local web application powered by Python's built-in `http.server`. It separates storage, business logic, and HTTP routing into dedicated classes while persisting daily progress in a local JSON file (`fitness_data.json`).
 
-Automated Macro Breakdown: Once the caloric target is secured, it instantly computes a science-backed nutrient distribution:
+## Key Features
 
-Protein: 30% of total calories (converted to grams at 4 kcal/g)
+- **Calorie & Macro Tracker:** Supports **Bulk** (2,500 kcal), **Cut** (1,800 kcal), and **Maintain** (2,000 kcal) targets with automatic macro calculation (`30% Protein / 40% Carbs / 30% Fats`).
+- **Step Counter:** Logs daily steps and calculates estimated calories burned (`0.4 kcal` per 10 steps) and distance covered (`0.5 m` per step) against a 3,000-step baseline goal.
+- **Water Intake Tracker:** Tracks daily hydration in milliliters against a 3,000 ml goal.
+- **Persistent Daily History:** Automatically merges daily entries by ISO date (`YYYY-MM-DD`) in `fitness_data.json` so updating one metric preserves all other metrics for that day.
+- **Browser UI & REST Endpoints:** Launches automatically in your default browser with tabbed navigation, live daily summary cards, and a sorted multi-day history table.
 
-Carbs: 40% of total calories (converted to grams at 4 kcal/g)
+## Architecture
 
-Fats: 30% of total calories (converted to grams at 9 kcal/g)
+The codebase follows a clean Object-Oriented design using only the Python standard library:
 
-Clean Formatting: Renders clean, precise terminal metrics using formatted float outputs (.1f).
+- **`FitnessStore`**: Thread-safe JSON persistence layer (`threading.Lock`) that handles reading, validating, and merging daily records.
+- **`FitnessTracker`**: Core domain logic layer responsible for input validation and calculating macros, burned calories, and distance.
+- **`FitnessRequestHandler`**: HTTP request handler serving the single-page frontend (`/`) and JSON API endpoints (`/api/state`, `/api/calories`, `/api/steps`, `/api/water`).
 
-🔹 Module 2: Step Counter & Distance Tracker (total_step_taken)
-Progressive Step Goal Loop: Enforces step goals (e.g., a 3,000-step baseline) by interactively prompting for remaining steps until the target is successfully cleared.
+## Tech Stack
 
-Automated Metrics Calculation:
+- **Backend:** Python 3 (`http.server`, `json`, `threading`, `pathlib`, `datetime`)
+- **Frontend:** Vanilla HTML5, CSS3, and JavaScript (Fetch API, accessible ARIA tab navigation)
+- **Storage:** Local JSON (`fitness_data.json`)
 
-Calorie Burn: Automatically evaluates approximate calories burned based on step intervals (0.4 kcal per 10 steps).
+## Getting Started
 
-Distance Traveled: Converts total steps into covered distance in meters (steps * 0.5m).
+### Prerequisites
 
-🔹 Module 3: Hydration Tracker (total_water_intake)
-Live Water Intake Logging: Tracks consumed fluids in milliliters.
+- Python 3.8 or higher (no third-party packages required)
 
-Interactive Deficit Tracking: Dynamically calculates remaining hydration goals until the target (e.g., 3,000ml) is reached, providing real-time feedback loops.
+### Run Locally
 
-⚙️ 3. Technical Highlights
-Modular Design: Each health parameter is isolated into its own encapsulated, reusable function, adhering to clean code standards.
-
-Persistent Control Loop (main()): Ensures the application loops smoothly back to the main menu after executing tasks, preventing crashes or unexpected exits until the user explicitly selects the exit option.
-
-Zero Bloatware: Built using core Python standard libraries (input, print, while, if-elif) ensuring blazing-fast execution speeds and zero external dependencies.
-
-⚙️ Logic & Threshold MatrixThe module uses an optimized conditional evaluation flow based on target biological recovery zones:Sleep DurationStatus OutputTraining Directive7.5 hrs – 10.0 hrsPeak Anabolic State 🔥Optimal recovery achieved. Safe for heavy overload.6.0 hrs – 7.4 hrsModerate Recovery ⚡Good condition. Keep form tight and intensity controlled.3.0 hrs – 5.9 hrsCNS Fatigue Warning ⚠️Elevated neural fatigue. Prioritize technique over max load.0.0 hrs – 2.9 hrsCritical Recovery Deficit 🛑Severe deprivation. Short nap recommended prior to training.
-🎯 Conclusion
-Calory is more than just a script—it bridges the gap between software development logic and real-world health optimization. It provides a fast, efficient, and distraction-free way to maintain daily discipline.
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/ahsan-python/](https://github.com/ahsan-python/)<your-repo-name>.git
+   cd <your-repo-name>
